@@ -211,7 +211,6 @@ class Empleados extends React.Component {
           </Table>
         </Container>
 
-        {/* Modal para Insertar Proyecto */}
         <Modal isOpen={this.state.modalInsertar}>
           <ModalHeader>
             <div>
@@ -311,8 +310,6 @@ class Empleados extends React.Component {
             </Button>
           </ModalFooter>
         </Modal>
-
-        {/* Modal para Actualizar Proyecto */}
         <Modal isOpen={this.state.modalActualizar}>
           <ModalHeader>
             <div>
