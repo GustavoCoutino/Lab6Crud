@@ -11,63 +11,12 @@ import {
   ModalFooter,
   Input,
 } from "reactstrap";
+import { proyectos as data } from "./proyectos.json";
 
-class Empleados extends React.Component {
+class Proyectos extends React.Component {
   constructor(props) {
     super(props);
-    this.data = [
-      {
-        id_proyecto: 1,
-        nombre: "Sistema de Ventas",
-        descripcion: "Implementación de sistema de punto de venta",
-        fecha_inicio: "2023-01-15",
-        fecha_fin_estimada: "2023-04-30",
-        fecha_fin_real: "2023-05-10",
-        estado: "Completado",
-        prioridad: 1,
-      },
-      {
-        id_proyecto: 2,
-        nombre: "Rediseño Web Corporativa",
-        descripcion: "Actualización y mejora del sitio web institucional",
-        fecha_inicio: "2023-03-01",
-        fecha_fin_estimada: "2023-06-15",
-        fecha_fin_real: "",
-        estado: "En Progreso",
-        prioridad: 2,
-      },
-      {
-        id_proyecto: 3,
-        nombre: "Aplicación Móvil",
-        descripcion: "Desarrollo de app para clientes",
-        fecha_inicio: "2023-02-10",
-        fecha_fin_estimada: "2023-08-30",
-        fecha_fin_real: "",
-        estado: "En Progreso",
-        prioridad: 1,
-      },
-      {
-        id_proyecto: 4,
-        nombre: "Migración de Servidores",
-        descripcion: "Migración a infraestructura en la nube",
-        fecha_inicio: "2023-05-01",
-        fecha_fin_estimada: "2023-06-30",
-        fecha_fin_real: "",
-        estado: "Planificado",
-        prioridad: 3,
-      },
-      {
-        id_proyecto: 5,
-        nombre: "Sistema de Inventario",
-        descripcion: "Implementación de control de inventario automatizado",
-        fecha_inicio: "2023-04-15",
-        fecha_fin_estimada: "2023-07-15",
-        fecha_fin_real: "",
-        estado: "Planificado",
-        prioridad: 2,
-      },
-    ];
-
+    this.data = data;
     this.state = {
       data: this.data,
       modalActualizar: false,
@@ -152,8 +101,11 @@ class Empleados extends React.Component {
 
   insertar = () => {
     var valorNuevo = { ...this.state.form };
-    valorNuevo.id_proyecto =
-      Math.max(...this.state.data.map((item) => item.id_proyecto)) + 1;
+    var newId =
+      this.state.data.length > 0
+        ? Math.max(...this.state.data.map((item) => item.id_proyecto)) + 1
+        : 1;
+    valorNuevo.id_proyecto = newId;
     var lista = this.state.data;
     lista.push(valorNuevo);
     this.setState({ modalInsertar: false, data: lista });
@@ -224,7 +176,13 @@ class Empleados extends React.Component {
                 className="form-control"
                 readOnly
                 type="text"
-                value={this.state.data.length + 1}
+                value={
+                  this.state.data.length > 0
+                    ? Math.max(
+                        ...this.state.data.map((item) => item.id_proyecto)
+                      ) + 1
+                    : 1
+                }
               />
             </FormGroup>
             <FormGroup>
@@ -424,4 +382,4 @@ class Empleados extends React.Component {
   }
 }
 
-export default Empleados;
+export default Proyectos;
